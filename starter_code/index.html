@@ -3,12 +3,17 @@
 <head>
 	<title>CSS HTML Forms Lab</title>
 	<link rel="stylesheet" href="style.css">
+	<!--Proza Libre-->
+	<link href="https://fonts.googleapis.com/css?family=Proza+Libre:400,400i,500,700,800" rel="stylesheet">
+
 </head>
 <body>
 	<section id="main">
 		<section class="formSection container">
 			<form class="form" method="GET">
 					<h1>My Dev Story</h1>
+					<!-- Container for form -->
+					<div class="containerForm">
 					<div class="row formGroup">
 					    <label for="name">Name:</label>
 					    <input id="name" name="name" >
@@ -86,6 +91,7 @@
 					<div class="row formGroup">
 				    	<input type="submit">
 				    </div>
+				    </div>
 				    
 			    </div>
 			</form>
@@ -110,25 +116,36 @@
 
 		$("form").on("submit", function(event){
 
+		
+
 		    // Stop the form from submitting
+    		event.preventDefault();
+    		//alert("Sorry Charlie, you can't submit this form.")
+    		
 
 	    	// Run the 'makeResults' function seen above
+	    	makeResults();
 
 	    	/*
 			
-				For each value entered into a form input, add the input to the corresponding sentence, then append the text into the results section:
+				For each value entered into a form input, add the input to the corresponding sentence, then append the text into the results section: */
 
-				"Once upon a time there was a Developer named NAME."
+				  $('.results').append("Once upon a time there was a Developer named " + $("#name").val().split("").join("") + ". ");
 
-				"NAME came to General Asssembly to VERB1 the great mountain of programming knowledge."
+				// "NAME came to General Asssembly to VERB1 the great mountain of programming knowledge." 
+				$('.results').append($(" #name").val().split(" ") + (" came to General Asssembly to " + $('#verb-1').val().split(" ") + " the great mountain of programming knowledge. "));			
 
-				""MISSION", NAME shouted."
+				// ""MISSION", NAME shouted."
+				// NEED SPACE AFTER MISSION
+				$('.results').append($("#mission").val().split(" ") + $("#name").val().split(" ") + (" shouted."));	
 	
-				"Though SENTIMENT, NAME was able to overcome all obstacles with the power of their NOUN."
+				// "Though SENTIMENT, NAME was able to overcome all obstacles with the power of their NOUN."
+				$('.results').append(" Though " + $("#radio1").val() + " was able to overcome all obstacles with the power of their " + $("#noun-1").val() + ". ");
 
-				"In the end, their success can be contributed entirely to their " + ADJECTIVE2[list each one checked, comma-separated] + NOUN2."
+				// "In the end, their success can be contributed entirely to their " + ADJECTIVE2[list each one checked, comma-separated] + NOUN2."
+				$('.results').append("In the end, their success can be contributed entirely to their " + $('input[name=adjective-2]:checked').val() + (" ") + $("#noun-2").val() + ". ");
 
-	    	*/ 
+	    	
 		});
 	</script>
 
